@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    <script>
+      function doTheThing() {
+        fetch("https://httpbin.org/get")
+          .then(res => res.json())
+          .then(res => {
+            document.getElementById("result").innerText = res.url
+          })
+      }
+    </script>
+  </head>
   <body>
-    <button>click me!</button>
+    <button id="button" onclick="doTheThing()">click me!</button>
+    <div id="result"></div>
   </body>
 </html>
