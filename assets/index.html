@@ -3,9 +3,11 @@
   <head>
     <script>
       function doTheThing() {
-        fetch("/thing").then(res => {
-          document.getElementById("result").innerText = res.status
-        })
+        fetch("/thing")
+          .then(res => res.text())
+          .then(data => {
+            document.getElementById("result").innerText = data
+          })
       }
     </script>
   </head>
