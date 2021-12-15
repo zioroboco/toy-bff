@@ -1,14 +1,19 @@
 import { expect, test } from "@playwright/test"
 import fetch from "node-fetch"
+import quibble from "quibble"
+
+import { thing } from "./thing.js"
 
 test.describe(`demo`, () => {
   test.beforeEach(async ({ page, baseURL }) => {
-    await page.route("/thing", async route => {
-      const body = await fetch("https://httpbin.org/get")
-        .then(res => res.json())
-        .then(res => res.url)
+    quibble("./thing", { thing: "blaaargh" })
 
-      route.fulfill({ status: 200, body })
+    await page.route("/thing", async route => {
+      // const body = await fetch("https://httpbin.org/get")
+      //   .then(res => res.json())
+      //   .then(res => res.url)
+
+      route.fulfill({ status: 200, body: thing })
     })
     await page.goto(baseURL)
     await page.waitForLoadState("networkidle")
