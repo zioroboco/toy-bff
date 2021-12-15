@@ -3,11 +3,9 @@
   <head>
     <script>
       function doTheThing() {
-        fetch("https://httpbin.org/get")
-          .then(res => res.json())
-          .then(res => {
-            document.getElementById("result").innerText = res.url
-          })
+        fetch("/thing").then(res => {
+          document.getElementById("result").innerText = res.status
+        })
       }
     </script>
   </head>
