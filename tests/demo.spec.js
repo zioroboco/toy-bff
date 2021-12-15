@@ -1,5 +1,13 @@
 import { expect, test } from "@playwright/test"
 
-test(`demo`, () => {
-  expect(true).toBe(true)
+test.describe(`demo cases`, () => {
+  test.beforeEach(async ({ page, baseURL }) => {
+    await page.goto(baseURL)
+    await page.waitForLoadState("networkidle")
+  })
+
+  test(`simple`, async ({ page }) => {
+    const content = await page.content()
+    expect(content).toMatch("click me!")
+  })
 })
